@@ -37,5 +37,12 @@ curl https://raw.githubusercontent.com/fivesmallq/acme-qingcloud-lb/master/acme-
 or
 
 ```sh
-acme-qingcloud-lb.sh -c other_config.json
+curl -O https://raw.githubusercontent.com/fivesmallq/acme-qingcloud-lb/master/acme-qingcloud-lb.sh
+sh acme-qingcloud-lb.sh
+```
+
+you can use other config file also
+
+```sh
+sh acme-qingcloud-lb.sh -c other_config.json
 ```

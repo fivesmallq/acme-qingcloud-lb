@@ -30,6 +30,9 @@ if ! _exists ~/.acme.sh/acme.sh; then
 fi
 
 if ! _exists qingcloud; then
+  if ! _exists pip; then
+    curl --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | sudo python
+  fi
 	sudo pip install qingcloud-cli
 fi
 
