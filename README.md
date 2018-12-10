@@ -1,5 +1,28 @@
 # acme-qingcloud-lb
-set and renew ssl keys to qingcloud lb with acme
+set and renew ssl keys to qingcloud loadbalance with [acme.sh](https://github.com/Neilpang/acme.sh)
+## Install
+
+1. acme.sh and qingcloud-cli
+
+```sh
+curl  https://get.acme.sh | sh
+sudo pip install qingcloud-cli
+```
+2. jq
+
+Linux:
+
+```sh
+JQ=/usr/bin/jq
+curl https://stedolan.github.io/jq/download/linux64/jq > $JQ && chmod +x $JQ
+ls -la $JQ
+```
+
+Mac:
+```sh
+brew install jq
+```
+
 
 ## Config
 
