@@ -3,7 +3,7 @@ set and renew ssl keys to qingcloud lb with acme
 
 ## Config
 
-put your set to config.json like example
+put your settings to config.json
 
 ```json
 {

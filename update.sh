@@ -14,11 +14,13 @@ for row in $(echo "${json}" | jq -r '.domains[]'); do
 	~/.acme.sh/acme.sh --issue --dns $dns_type -d $domain
 	echo "issue $domain success"
 done
+
 QINGCLOUD_CONFIG=qingcloud_config.yaml
 
 qy_access_key_id=`echo $json |jq -r .qy_access_key_id `
 qy_secret_access_key=`echo $json |jq -r .qy_secret_access_key `
 zone=`echo $json |jq -r .zone `
+
 # create qingcloud config file
 echo "create qingcloud config file $QINGCLOUD_CONFIG"
 
@@ -30,6 +32,7 @@ lb=`echo $json |jq -r .loadbalance_id `
 lbl=`echo $json |jq -r .loadbalance_listener_id `
 
 certificate_id_list=""
+
 for row in $(echo "${json}" | jq -r '.domains[]'); do
     _jq() {
      echo ${row}
@@ -49,13 +52,16 @@ for row in $(echo "${json}" | jq -r '.domains[]'); do
 done
 
 certificate_id_list=`echo $certificate_id_list | cut -c 2-`
+
 old_ssl_id=`qingcloud iaas describe-loadbalancer-listeners -l $lb -s $lbl -f $QINGCLOUD_CONFIG | jq -r '.loadbalancer_listener_set[0].server_certificate_id | join(",")'`
+
 echo "set server_certificate_id $certificate_id_list to loadbalance $lb with loadbalance listener $lbl"
 ## update loadbalancer listener setting, apply setting
 qingcloud iaas modify-loadbalancer-listener-attributes -s $lbl -S $certificate_id_list -f $QINGCLOUD_CONFIG
 qingcloud iaas update-loadbalancers -l $lb -f $QINGCLOUD_CONFIG
+
 echo "old ssl id:$old_ssl_id"
-echo "waitting for change"
+echo "waiting for change..."
 lb_status=`qingcloud iaas describe-loadbalancers -l $lb -f $QINGCLOUD_CONFIG | jq -r '.loadbalancer_set[0].status'`
 while true ; do
 	echo "loadbalancer status:$lb_status"
@@ -66,6 +72,7 @@ while true ; do
         break;
     fi
 done
+
 echo "delete old ssl id:$old_ssl_id"
 qingcloud iaas delete-server-certificates -s $old_ssl_id -f $QINGCLOUD_CONFIG
 
