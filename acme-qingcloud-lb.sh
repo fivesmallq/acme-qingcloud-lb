@@ -65,7 +65,7 @@ fi
 if ! _exists jq; then
   echo "installing jq..."
   if _exists apt-get; then
-    sudo apt-get install jq
+    sudo apt-get install jq -y
   elif _exists brew; then
     brew install jq
   else
@@ -76,7 +76,7 @@ if ! _exists jq; then
 fi
 
 
-if [[ -z $config_file ]]; then
+if [ -z "$config_file" ]; then
   echo "use default config: config.json"
   config_file="config.json"
 else
