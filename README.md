@@ -1,18 +1,30 @@
 # acme-qingcloud-lb
 set and renew ssl keys to qingcloud lb with acme
 
-## issue domain
+## Config
 
-put your domain to domain.txt, then 
+put your set to config.json like example
 
-```sh
-./issue.sh
+```json
+{
+	"qy_access_key_id":"QINGCLOUDACCESSKEYID",
+	"qy_secret_access_key":"QINGCLOUDSECRETACCESSKEYEXAMPLE",
+	"zone":"pek3b",
+	"loadbalance_id":"lb-xu9ckdzm",
+	"loadbalance_listener_id":"lbl-7zk5p75d",
+	"domains":[
+		"*.example.com",
+		"*.prod.example.com",
+		"*.dev.example.com"
+	],
+	"dns_type":"dns_dp",
+	"dns_env_shell":"export DP_Id=example; export DP_Key=example"
+}
 ```
 
-## update qingcloud lb
+## Run
 
-set your Qingcloud API Key to qingcloud_config.yaml, then 
 
 ```sh
-./qingcloud_lb.sh -lb $lb_id -lbl $lbl_id  -f ./qingcloud_config.yaml
+sh update.sh
 ```
