@@ -1,3 +1,0 @@
-*.xxx.com
-*.prod.xxx.com
-*.dev.xxx.com
