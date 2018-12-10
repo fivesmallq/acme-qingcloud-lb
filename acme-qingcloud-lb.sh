@@ -76,25 +76,6 @@ if ! _exists jq; then
 fi
 
 
-POSITIONAL=()
-while [[ $# -gt 0 ]]
-do
-key="$1"
-
-case $key in
-    -c|--config)
-    config_file="$2"
-    shift # past argument
-    shift # past value
-    ;;
-   *)    # unknown option
-    POSITIONAL+=("$1") # save it in an array for later
-    shift # past argument
-    ;;
-esac
-done
-set -- "${POSITIONAL[@]}" # restore positional parameters
-
 if [[ -z $config_file ]]; then
   echo "use default config: config.json"
   config_file="config.json"
