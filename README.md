@@ -46,3 +46,9 @@ you can use other config file also
 ```sh
 sh acme-qingcloud-lb.sh -c other_config.json
 ```
+
+## Acknowledgments
+
+acme.sh https://github.com/Neilpang/acme.sh
+
+jq https://github.com/stedolan/jq
