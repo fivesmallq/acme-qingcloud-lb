@@ -1,7 +1,7 @@
 # acme-qingcloud-lb
 set and renew ssl keys to qingcloud loadbalance with [acme.sh](https://github.com/Neilpang/acme.sh)
 
-## Config
+## 1. Config
 
 update your settings to config.json
 
@@ -28,7 +28,7 @@ curl -O https://raw.githubusercontent.com/fivesmallq/acme-qingcloud-lb/master/co
 }
 ```
 
-## Run
+## 2. Run
 
 ```sh
 curl https://raw.githubusercontent.com/fivesmallq/acme-qingcloud-lb/master/acme-qingcloud-lb.sh | sh
@@ -47,7 +47,7 @@ you can use other config file also
 sh acme-qingcloud-lb.sh -c other_config.json
 ```
 
-## Acknowledgments
+## 3. Acknowledgments
 
 acme.sh https://github.com/Neilpang/acme.sh
 
