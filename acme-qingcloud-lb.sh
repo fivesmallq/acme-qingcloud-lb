@@ -170,6 +170,7 @@ _update_qingcloud_lb() {
 
 main() {
 config_file=""
+ignoreissue=""
 while [ ${#} -gt 0 ]; do
   case "${1}" in
     --help | -h)
@@ -179,6 +180,10 @@ while [ ${#} -gt 0 ]; do
     --version | -v)
       version
       return
+      ;;
+    --ignoreissue | -igi)
+      ignoreissue="true"
+      shift
       ;;
     --config | -c)
       config_file="$2"
@@ -206,8 +211,13 @@ fi
 # load config
 json=`cat $config_file`
 
-# issue domain
-_issue "$json"
+if [ -z "$ignoreissue" ]; then
+  # issue domain
+  _issue "$json"
+else
+  echo "ignore issue domain certificate"
+fi
+
 
 # update qingcloud loadbalancer settings
 QINGCLOUD_CONFIG=qingcloud_config.yaml
@@ -228,6 +238,7 @@ Commands:
   --help, -h               Show this help message.
   --version, -v            Show version info.
   --config, -c             the config file will be read from this path.
+  --ignoreissue, -igi        ignore issue domain certificates.
   "
 }
 
